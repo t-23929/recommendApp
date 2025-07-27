@@ -2,11 +2,9 @@ import streamlit as st
 import pandas as pd
 
 # 仮データ
-data = pd.DataFrame({
-    "foodbank_name": ["あおぞらフードバンク", "ひまわり食堂"],
-    "address": ["東京都渋谷区", "東京都杉並区"],
-    "needs": [["お米", "缶詰"], ["ミルク", "離乳食"]]
-})
+data = pd.read_csv(data.csv)
+
+data["needs"] = data["needs"].apply(lambda x: [item.strip() for item in x.split(",")])
 
 st.title("商品に応じたフードバンク推薦")
 
