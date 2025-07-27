@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # 仮データ
-data = pd.read_csv(data.csv)
+data = pd.read_csv("data.csv")
 
 data["needs"] = data["needs"].apply(lambda x: [item.strip() for item in x.split(",")])
 
