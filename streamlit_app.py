@@ -12,9 +12,10 @@ st.title("商品に応じたフードバンク推薦")
 user_item = st.text_input("寄付したい商品を入力してください（例：お米）")
 
 if user_item:
-    matched = data[data["needs"].apply(lambda x: user_item in x)]
+    matched = data[data["needs"].apply(lambda need_list: any(user_item in item for item in need_list))]
+    
     if not matched.empty:
         st.markdown("### この商品を必要としているフードバンク")
         st.dataframe(matched[["foodbank_name", "address"]])
     else:
-        st.write("この商品を必要としているフードバンクは見つかりませんでした。")
+        st.warning("この商品を必要としているフードバンクは見つかりませんでした。")
